@@ -71,8 +71,9 @@ func getSquareRootoF(_ num: Int) throws -> String {
       throw SqrtError.out_of_bounds
     }
 
-    // loop from 1 to 10000 until i find an i where i * i is equal to num
-    for i in 1...10_000 {
+    // loop from 1 to 100 until i find an i where i * i is equal to num
+    // The reason i'm looping only up to 100 because 100 * 100 is 1s 10,000 which is the biggest num can be
+    for i in 1...100 {
       if i * i == num {
         return "The square root of \(num) is \(i)"
       }
@@ -80,43 +81,43 @@ func getSquareRootoF(_ num: Int) throws -> String {
       // how do i handle not finding the square root of a num and throwing an error?
       // if i reached the last number and multiplying it by itself doesnt give the square root of the number
       // then that means no root was found
-      if i == 10000 && i * i != num { 
+      if i == 100 && i * i != num { 
         throw SqrtError.no_root
       }
     }
   return "" 
 
 }
+print("\n\n")
 
-do {
-  let result = try getSquareRootoF(-1)
-  print(result)
-} catch SqrtError.out_of_bounds {
-  print("The number entered was out of bounds. Please enter a number between 1 and 10,000 only")
-} catch SqrtError.no_root {
-  print("There is no root for this number.")
-} catch {
-  print("An error occured.")
+
+for j in -1...10 {
+  do {
+    let result = try getSquareRootoF(j)
+    print(result)
+  } catch SqrtError.out_of_bounds {
+    print("\(j) entered was out of bounds. Please enter a number between 1 and 10,000 only")
+  } catch SqrtError.no_root {
+    print("There is no root for \(j)")
+  } catch {
+    print("An error occured.")
+  }
 }
 
-do {
-  let result = try getSquareRootoF(25)
-  print(result)
-} catch SqrtError.out_of_bounds {
-  print("The number entered was out of bounds. Please enter a number between 1 and 10,000 only")
-} catch SqrtError.no_root {
-  print("There is no root for this number.")
-} catch {
-  print("An error occured.")
-}
+/*
+The following is printed as a result of the loop above:
 
-do {
-  let result = try getSquareRootoF(5)
-  print(result)
-} catch SqrtError.out_of_bounds {
-  print("The number entered was out of bounds. Please enter a number between 1 and 10,000 only")
-} catch SqrtError.no_root {
-  print("There is no root for this number.")
-} catch {
-  print("An error occured.")
-}
+-1 entered was out of bounds. Please enter a number between 1 and 10,000 only
+0 entered was out of bounds. Please enter a number between 1 and 10,000 only
+The square root of 1 is 1
+There is no root for 2
+There is no root for 3
+The square root of 4 is 2
+There is no root for 5
+There is no root for 6
+There is no root for 7
+There is no root for 8
+The square root of 9 is 3
+There is no root for 10
+
+*/
