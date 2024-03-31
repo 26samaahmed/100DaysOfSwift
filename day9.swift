@@ -88,7 +88,7 @@ testMultipleFunctions {
   print("third func")
 }
 
-// can use a slighly different les cluttered syntax
+// can use a slighly different less cluttered syntax
 let sortNames3 = team.sorted {name1, name2 in
   if name1 == "sama" {
     return true
@@ -105,7 +105,32 @@ let sortNames4 = team.sorted {
   } else if $1 == "sama" {
     return false
   }
+  return $0 > $1
 }
 
 // if i want to reverse the array, i can do this
 let reverseTeam = team.sorted { $0 > $1 }
+
+// checkpoint 5
+let luckyNumbers = [7, 4, 38, 21, 16, 15, 12, 33, 31, 49]
+
+// filter out any numbers that are even
+let filterEven = luckyNumbers.filter{$0 % 2 != 0}
+print(filterEven)
+
+print("\n")
+// sort the array in ascending order
+let sortAscending = filterEven.sorted{
+  $0 < $1
+}
+
+print(sortAscending)
+
+print("\n")
+
+// map them to strings in the format "7 is a lucky number"
+let formatString = sortAscending.map{(n) -> String in
+  return "\(n) is a lucky number"
+}
+
+print(formatString)
