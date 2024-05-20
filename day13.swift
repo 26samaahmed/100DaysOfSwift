@@ -55,3 +55,65 @@ func randomBool() -> some Equatable {
 }
 
 print(randomBool())
+
+// if i'm returning a new value rather than changing it in place, then use word endings like ed or ing
+// if we want a struct to have the default memberwise initializer as well as our custom initializer, we can do it using extensions
+
+struct Book {
+  let title: String
+  let pageCount: Int
+  let readingHours: Int
+}
+
+extension Book {
+  init(title: String, pageCount: Int) {
+    self.title = title
+    self.pageCount = pageCount
+    self.readingHours = pageCount / 50
+  }
+}
+
+// collection include arrays, sets, dictionaries
+extension Collection {
+  var isNotEmpty: Bool {
+      isEmpty == false
+  }
+}
+
+var guests = ["Sama", "Salma", "Soma"]
+if guests.isNotEmpty {
+  print("guest count is  \(guests.count)")
+}
+
+// Checkpoint 8
+protocol Building {
+  var roomCount: Int {get}
+  var cost: Int {get}
+  var agentName: String {get}
+
+  func displayInfo()
+}
+
+extension Building {
+  func displayInfo() {
+      print("This building has \(roomCount) rooms and it costs around $\(cost). The estate's agent name is \(agentName).")
+  }
+}
+
+struct House: Building {
+  var roomCount: Int = 4
+  var cost: Int = 988000
+  var agentName: String = "Yolanda Marie"
+}
+
+struct Office: Building {
+  var roomCount: Int = 16
+  var cost: Int = 4000000
+  var agentName: String = "Angelina Brown"
+}
+
+let house = House()
+house.displayInfo()
+
+let office = Office()
+office.displayInfo()
